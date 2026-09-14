@@ -8,9 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "daisyui": "^5.7.37",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
+    "drizzle-orm": "^0.45.2",
+    "geist": "^1.7.2",
+    "lucide-react": "^1.45.0",
+    "motion": "^13.2.0",
     "next": "16.3.5",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "resend": "^6.28.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
