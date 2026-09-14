@@ -1,6 +1,37 @@
-const en = {} as const
+import type { Dictionary } from './ru'
 
-export type DictionaryKey = keyof typeof en
-export type Dictionary = Record<DictionaryKey, string>
+const en: Dictionary = {
+	'common.appName': 'app',
+	'common.loading': 'Loading…',
+	'common.save': 'Save',
+	'common.cancel': 'Cancel',
+	'nav.dashboard': 'Dashboard',
+	'nav.pricing': 'Pricing',
+	'nav.signOut': 'Sign out',
+	'nav.signIn': 'Sign in',
+	'auth.login.title': 'Sign in',
+	'auth.login.submit': 'Sign in',
+	'auth.login.noAccount': 'No account?',
+	'auth.login.hasAccount': 'Already have an account?',
+	'auth.register.title': 'Create account',
+	'auth.register.submit': 'Create account',
+	'auth.email': 'Email',
+	'auth.password': 'Password',
+	'auth.name': 'Name',
+	'auth.google': 'Continue with Google',
+	'auth.or': 'or',
+	'auth.error.generic': 'Something went wrong, please try again',
+	'price.title': 'Pricing',
+	'price.subtitle': 'Start free — upgrade when you need to',
+	'price.perMonth': '/mo',
+	'price.choose': 'Choose',
+	'price.free.name': 'Free',
+	'price.free.f1': '1 project',
+	'price.free.f2': 'Basic analytics',
+	'price.pro.name': 'Pro',
+	'price.pro.f1': 'Unlimited projects',
+	'price.pro.f2': 'Priority support',
+	'lang.switch': 'Language'
+}
 
 export default en

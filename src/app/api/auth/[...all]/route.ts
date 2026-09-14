@@ -1,4 +1,3 @@
 import { auth } from '@/lib/auth'
-export const { GET, POST } = auth.handler
-	? { GET: auth.handler, POST: auth.handler }
-	: {}
+const handler = auth.handler
+export { handler as GET, handler as POST }

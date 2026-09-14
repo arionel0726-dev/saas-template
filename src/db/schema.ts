@@ -9,6 +9,7 @@
 // 	uuid
 // } from 'drizzle-orm/pg-core'
 import { pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { user } from './auth-schema'
 export const postStatusEnum = pgEnum('post_status', [
 	'pending',
 	'reviewing',
@@ -17,7 +18,6 @@ export const postStatusEnum = pgEnum('post_status', [
 	'completed',
 	'closed'
 ])
-
 // Оплата (Lemon Squeezy)
 export const subscriptions = pgTable('subscriptions', {
 	id: uuid('id').defaultRandom().primaryKey(),
