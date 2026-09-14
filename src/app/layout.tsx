@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://slyshno.app'
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://yourapp.com'
 const SITE_DESCRIPTION =
 	'Public feedback board, embeddable widget, roadmap, and changelog with automatic email updates — collect feedback, prioritize it, and close the loop with your users.'
 
@@ -15,21 +15,21 @@ const SITE_DESCRIPTION =
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
 	title: {
-		default: 'Slyshno — Feedback boards, roadmap, and changelog',
-		template: '%s · Slyshno'
+		default: 'app ',
+		template: '%s · app'
 	},
 	description: SITE_DESCRIPTION,
-	applicationName: 'Slyshno',
+	applicationName: '',
 	robots: { index: true, follow: true },
 	openGraph: {
 		type: 'website',
-		siteName: 'Slyshno',
-		title: 'Slyshno — Feedback boards, roadmap, and changelog',
+		siteName: 'app',
+		title: 'app — ',
 		description: SITE_DESCRIPTION
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Slyshno — Feedback boards, roadmap, and changelog',
+		title: 'app —',
 		description: SITE_DESCRIPTION
 	}
 }

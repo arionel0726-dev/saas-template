@@ -21,7 +21,9 @@ export const postStatusEnum = pgEnum('post_status', [
 // Оплата (Lemon Squeezy)
 export const subscriptions = pgTable('subscriptions', {
 	id: uuid('id').defaultRandom().primaryKey(),
-	(here-need-to-add-user-id-field).
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id, { onDelete: 'cascade' }),
 	provider: text('provider').notNull().default('lemonsqueezy'),
 	customerId: text('customer_id'),
 	subscriptionId: text('subscription_id').unique(),
