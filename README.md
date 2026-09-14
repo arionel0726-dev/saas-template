@@ -1,36 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Быстрый старт (30 минут)
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] `bun install`
+- [ ] Neon: создать проект → скопировать pooled DATABASE_URL →
+      `bunx drizzle-kit push`
+- [ ] `cp .env.example .env.local` → заполнить
+- [ ] Google OAuth: console.cloud.google.com → Credentials → redirect:
+      `${BETTER_AUTH_URL}/api/auth/callback/google`
+- [ ] Resend: добавить домен, прописать DKIM-записи (проверка займёт время —
+      начните сразу)
+- [ ] Lemon Squeezy: создать продукт+variant → webhook:
+      `${SITE}/api/webhooks/lemonsqueezy` со всеми событиями
+- [ ] `bun run dev` → проверить: регистрация, Google login, покупка (test mode),
+      письмо из outbox
+- [ ] Vercel: импорт репо → env vars → deploy
+- [ ] Поменять в src/lib/routes.ts, SITE_NAME в layout, контент лендинга

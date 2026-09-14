@@ -34,7 +34,7 @@ export default function LoginPage() {
 					onClick={() =>
 						authClient.signIn.social({
 							provider: 'google',
-							callbackURL: `${ROUTES.afterLogin}`
+							callbackURL: ROUTES.afterLogin
 						})
 					}
 				>

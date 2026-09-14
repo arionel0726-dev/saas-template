@@ -5,6 +5,9 @@ import { ROUTES } from '@/lib/routes'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+
+export const metadata = { robots: { index: false, follow: false } }
+
 export default async function AppLayout({
 	children
 }: {

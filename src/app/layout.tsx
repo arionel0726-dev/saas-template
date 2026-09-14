@@ -2,16 +2,32 @@ import { I18nProvider } from '@/i18n/context'
 import { getDictionary } from '@/i18n/server'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
+import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
-
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://yourapp.com'
 const SITE_DESCRIPTION =
 	'Public feedback board, embeddable widget, roadmap, and changelog with automatic email updates — collect feedback, prioritize it, and close the loop with your users.'
 
 // Метаданные по умолчанию для всего сайта; страницы переопределяют
 // title/description/alternates своим export const metadata.
-export const metadata = { robots: { index: false, follow: false } }
+export const metadata: Metadata = {
+	metadataBase: new URL(SITE_URL),
+	title: { default: 'app', template: '%s · app' },
+	description: SITE_DESCRIPTION,
+	robots: { index: true, follow: true },
+	openGraph: {
+		type: 'website',
+		siteName: 'app',
+		title: 'app',
+		description: SITE_DESCRIPTION
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'app',
+		description: SITE_DESCRIPTION
+	}
+}
 // export const metadata: Metadata = {
 // 	metadataBase: new URL(SITE_URL),
 // 	title: {
