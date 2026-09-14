@@ -37,6 +37,18 @@ const ru = {
 	'price.pro.f1': 'Безлимит проектов',
 	'price.pro.f2': 'Приоритетная поддержка',
 
+	// ru.ts — добавить в объект
+	'billing.cancel': 'Отменить подписку',
+	'billing.cancelConfirm':
+		'Отменить подписку? Доступ сохранится до конца оплаченного периода.',
+	'billing.cancelled': 'Подписка отменена',
+	'common.copy': 'Копировать',
+	'common.copied': 'Скопировано',
+	'theme.toggle': 'Тема',
+	'theme.light': 'Светлая',
+	'theme.dark': 'Тёмная',
+	'landing.faq.title': 'Частые вопросы',
+
 	// language
 	'lang.switch': 'Язык'
 } as const

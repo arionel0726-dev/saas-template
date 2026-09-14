@@ -1,8 +1,8 @@
 'use client'
 import { useI18n } from '@/i18n/context'
 import { authClient } from '@/lib/auth-client'
+import { LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-
 export function SignOutButton() {
 	const { t } = useI18n()
 	const router = useRouter()
@@ -14,7 +14,8 @@ export function SignOutButton() {
 				router.push('/login')
 			}}
 		>
-			{t('nav.signOut')}
+			<LogOut size={16} />
+			<span className="hidden sm:inline">{t('nav.signOut')}</span>
 		</button>
 	)
 }

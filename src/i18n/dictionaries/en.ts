@@ -31,6 +31,19 @@ const en: Dictionary = {
 	'price.pro.name': 'Pro',
 	'price.pro.f1': 'Unlimited projects',
 	'price.pro.f2': 'Priority support',
+
+	// en.ts — то же самое
+	'billing.cancel': 'Cancel subscription',
+	'billing.cancelConfirm':
+		'Cancel subscription? Access remains until the end of the paid period.',
+	'billing.cancelled': 'Subscription cancelled',
+	'common.copy': 'Copy',
+	'common.copied': 'Copied',
+	'theme.toggle': 'Theme',
+	'theme.light': 'Light',
+	'theme.dark': 'Dark',
+	'landing.faq.title': 'FAQ',
+
 	'lang.switch': 'Language'
 }
 

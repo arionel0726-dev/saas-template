@@ -21,7 +21,7 @@ export default function RegisterPage() {
 		const { error } = await authClient.signUp.email({ name, email, password })
 		setLoading(false)
 		if (error) setError(error.message ?? t('auth.error.generic'))
-		else router.push('/dashboard')
+		else router.push('/here redirect ot your app or dashboard')
 	}
 
 	return (
@@ -35,7 +35,7 @@ export default function RegisterPage() {
 					onClick={() =>
 						authClient.signIn.social({
 							provider: 'google',
-							callbackURL: '/dashboard'
+							callbackURL: '/here redirect ot your app or dashboard'
 						})
 					}
 				>

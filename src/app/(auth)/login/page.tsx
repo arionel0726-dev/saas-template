@@ -20,7 +20,7 @@ export default function LoginPage() {
 		const { error } = await authClient.signIn.email({ email, password })
 		setLoading(false)
 		if (error) setError(error.message ?? t('auth.error.generic'))
-		else router.push('/dashboard')
+		else router.push('here redirect ot your app or dashboard')
 	}
 
 	return (
@@ -34,7 +34,7 @@ export default function LoginPage() {
 					onClick={() =>
 						authClient.signIn.social({
 							provider: 'google',
-							callbackURL: '/dashboard'
+							callbackURL: '/here redirect ot your app or dashboard'
 						})
 					}
 				>

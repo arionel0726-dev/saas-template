@@ -19,7 +19,7 @@ export default async function AppLayout({
 			<header className="navbar bg-base-100 shadow px-4">
 				<div className="flex-1">
 					<Link
-						href="/dashboard"
+						href="/here redirect ot your app or dashboard"
 						className="btn btn-ghost text-lg sm:text-xl px-2"
 					>
 						{t('common.appName')}
