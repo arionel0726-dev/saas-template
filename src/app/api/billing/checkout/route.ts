@@ -1,10 +1,10 @@
 import { auth } from '@/lib/auth'
+import { ROUTES } from '@/lib/routes'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
-
 export async function GET(req: Request) {
 	const session = await auth.api.getSession({ headers: await headers() })
-	if (!session) return NextResponse.redirect(new URL('/login', req.url))
+	if (!session) return NextResponse.redirect(new URL(ROUTES.login, req.url))
 
 	const { searchParams } = new URL(req.url)
 	const plan = searchParams.get('plan')

@@ -1,17 +1,17 @@
 import { SignOutButton } from '@/components/buttons/sign-out-button'
 import { getT } from '@/i18n/server'
 import { auth } from '@/lib/auth'
+import { ROUTES } from '@/lib/routes'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-
 export default async function AppLayout({
 	children
 }: {
 	children: React.ReactNode
 }) {
 	const session = await auth.api.getSession({ headers: await headers() })
-	if (!session) redirect('/login')
+	if (!session) redirect(ROUTES.login)
 	const { t } = await getT()
 
 	return (
@@ -19,7 +19,7 @@ export default async function AppLayout({
 			<header className="navbar bg-base-100 shadow px-4">
 				<div className="flex-1">
 					<Link
-						href="/here redirect ot your app or dashboard"
+						href={ROUTES.afterLogin}
 						className="btn btn-ghost text-lg sm:text-xl px-2"
 					>
 						{t('common.appName')}

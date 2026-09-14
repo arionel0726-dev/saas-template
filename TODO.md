@@ -13,3 +13,5 @@ supabase or neon
 - [ ] `src/components/buttons/sign-out-button.tsx` — `router.push('/login')`
       после выхода
 - [ ] `src/app/price/page.tsx` — `href` тарифа Free (сейчас `/register`)
+- [ ] `src/lib/routes.ts` — все ключевые редиректы приложения (после логина,
+      логин, регистрация). Все остальные файлы берут пути отсюда.

@@ -1,10 +1,10 @@
 'use client'
 import { useI18n } from '@/i18n/context'
 import { authClient } from '@/lib/auth-client'
+import { ROUTES } from '@/lib/routes'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-
 export default function RegisterPage() {
 	const { t } = useI18n()
 	const router = useRouter()
@@ -21,7 +21,7 @@ export default function RegisterPage() {
 		const { error } = await authClient.signUp.email({ name, email, password })
 		setLoading(false)
 		if (error) setError(error.message ?? t('auth.error.generic'))
-		else router.push('/here redirect ot your app or dashboard')
+		else router.push(ROUTES.afterLogin)
 	}
 
 	return (
@@ -35,7 +35,7 @@ export default function RegisterPage() {
 					onClick={() =>
 						authClient.signIn.social({
 							provider: 'google',
-							callbackURL: '/here redirect ot your app or dashboard'
+							callbackURL: `${ROUTES.afterLogin}`
 						})
 					}
 				>
