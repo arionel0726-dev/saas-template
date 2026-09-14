@@ -1,11 +1,16 @@
 import { emailOutbox } from '@/db/schema'
 import { WelcomeEmail } from '@/emails/welcome'
+import { captureError } from '@/lib/capture-error'
 import { db } from '@/lib/db'
 import { render } from '@react-email/render'
 import { eq } from 'drizzle-orm'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Ленивая инициализация: не падаем при импорте модуля, если ключ не задан
+function getResend() {
+	if (!process.env.RESEND_API_KEY) throw new Error('RESEND_API_KEY is not set')
+	return new Resend(process.env.RESEND_API_KEY)
+}
 
 const TEMPLATES = {
 	welcome: {
@@ -24,8 +29,8 @@ export async function enqueueEmail(
 		.values({ to, template, payload, subject: TEMPLATES[template].subject })
 }
 
-// Вызвается из cron-роута — см. ниже
 export async function processOutbox(limit = 10) {
+	const resend = getResend() // ← здесь создаём клиент, не на верхнем уровне
 	const pending = await db
 		.select()
 		.from(emailOutbox)
@@ -47,13 +52,12 @@ export async function processOutbox(limit = 10) {
 				.update(emailOutbox)
 				.set({ status: 'sent', sentAt: new Date() })
 				.where(eq(emailOutbox.id, job.id))
-		} catch {
+		} catch (e) {
+			await captureError(e, { source: 'cron', url: '/api/cron/outbox' })
+			const attempts = job.attempts + 1
 			await db
 				.update(emailOutbox)
-				.set({
-					status: 'failed',
-					attempts: job.attempts + 1
-				})
+				.set({ status: attempts >= 3 ? 'failed' : 'pending', attempts })
 				.where(eq(emailOutbox.id, job.id))
 		}
 	}

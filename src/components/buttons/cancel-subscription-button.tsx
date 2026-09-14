@@ -1,4 +1,5 @@
 'use client'
+import { Button } from '@/components/ui/button'
 import { useI18n } from '@/i18n/context'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -20,20 +21,17 @@ export function CancelSubscriptionButton() {
 	}
 
 	return (
-		<div className="flex flex-col gap-2">
-			<button
-				className="btn btn-error btn-outline btn-block min-h-12"
+		<div className="grid gap-2">
+			<Button
+				variant="destructive"
+				className="w-full h-11"
 				disabled={loading}
 				onClick={cancel}
 			>
-				{loading ? (
-					<span className="loading loading-spinner" />
-				) : (
-					t('billing.cancel')
-				)}
-			</button>
+				{loading ? '…' : t('billing.cancel')}
+			</Button>
 			{error && (
-				<p className="text-error text-sm" role="alert">
+				<p className="text-sm text-destructive" role="alert">
 					{error}
 				</p>
 			)}

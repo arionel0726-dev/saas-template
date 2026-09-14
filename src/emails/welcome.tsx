@@ -12,12 +12,13 @@ export function WelcomeEmail({ name }: { name: string }) {
 	return (
 		<Html>
 			<Head />
-			<Preview>Добро пожаловать</Preview>
+			<Preview>Welcome</Preview>
 			<Body style={{ fontFamily: 'sans-serif' }}>
 				<Container>
-					<Heading>Привет, {name}!</Heading>
+					<Heading>Hi, {name}!</Heading>
 					<Text>
-						Аккаунт создан. Если это были не вы — просто проигнорируйте письмо.
+						Your account has been created. If you were not, please ignore this
+						email.
 					</Text>
 				</Container>
 			</Body>

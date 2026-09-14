@@ -1,10 +1,16 @@
 import { I18nProvider } from '@/i18n/context'
 import { getDictionary } from '@/i18n/server'
+import { cn } from '@/lib/utils'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
+import { Geist } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
+
 const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://yourapp.com'
 const SITE_DESCRIPTION =
 	'Public feedback board, embeddable widget, roadmap, and changelog with automatic email updates — collect feedback, prioritize it, and close the loop with your users.'
@@ -57,7 +63,14 @@ const themeScript = `
     if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.documentElement.classList.add("dark");
     }
-  } catch (e) {}
+  } catch (e) {
+		await captureError(e, { source: 'cron', url: '/api/cron/outbox' })
+		const attempts = job.attempts + 1
+		await db.update(emailOutbox).set({
+			status: attempts >= 3 ? 'failed' : 'pending',
+			attempts
+		}).where(eq(emailOutbox.id, job.id))
+	}
 })();
 `
 
@@ -71,7 +84,12 @@ export default async function RootLayout({
 	return (
 		<html
 			lang={locale}
-			className={`${GeistSans.variable} ${GeistMono.variable}`}
+			className={cn(
+				GeistSans.variable,
+				GeistMono.variable,
+				'font-sans',
+				geist.variable
+			)}
 			suppressHydrationWarning
 		>
 			<body>
@@ -80,9 +98,15 @@ export default async function RootLayout({
 					strategy="beforeInteractive"
 					dangerouslySetInnerHTML={{ __html: themeScript }}
 				/>
-				<I18nProvider locale={locale} dict={dict}>
-					{children}
-				</I18nProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="light"
+					enableSystem={false}
+				>
+					<I18nProvider locale={locale} dict={dict}>
+						{children}
+					</I18nProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	)
