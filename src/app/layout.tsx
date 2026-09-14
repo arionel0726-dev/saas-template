@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner'
 import { I18nProvider } from '@/i18n/context'
 import { getDictionary } from '@/i18n/server'
 import { cn } from '@/lib/utils'
@@ -6,7 +7,6 @@ import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Geist } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
@@ -56,24 +56,6 @@ export const metadata: Metadata = {
 // 	}
 // }
 
-const themeScript = `
-(function () {
-  try {
-    var t = localStorage.getItem("app-theme");
-    if (t === "dark" || (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      document.documentElement.classList.add("dark");
-    }
-  } catch (e) {
-		await captureError(e, { source: 'cron', url: '/api/cron/outbox' })
-		const attempts = job.attempts + 1
-		await db.update(emailOutbox).set({
-			status: attempts >= 3 ? 'failed' : 'pending',
-			attempts
-		}).where(eq(emailOutbox.id, job.id))
-	}
-})();
-`
-
 export default async function RootLayout({
 	children
 }: {
@@ -93,11 +75,6 @@ export default async function RootLayout({
 			suppressHydrationWarning
 		>
 			<body>
-				<Script
-					id="theme-script"
-					strategy="beforeInteractive"
-					dangerouslySetInnerHTML={{ __html: themeScript }}
-				/>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="light"
@@ -105,6 +82,7 @@ export default async function RootLayout({
 				>
 					<I18nProvider locale={locale} dict={dict}>
 						{children}
+						<Toaster position="top-center" richColors />
 					</I18nProvider>
 				</ThemeProvider>
 			</body>

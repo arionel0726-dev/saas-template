@@ -20,7 +20,7 @@ const buttonVariants = cva(
 			},
 			size: {
 				default:
-					"'h-11 px-5 gap-2 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 text-base",
+					'h-11 px-5 gap-2 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 text-base',
 				sm: "h-9 px-3.5 text-sm gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
 				lg: 'h-12 px-6 gap-2 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
 				icon: 'size-8',

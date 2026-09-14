@@ -31,7 +31,6 @@ export default async function AppLayout({
 						<Button
 							variant="ghost"
 							size="sm"
-							asChild={false}
 							render={<Link href="/price" />}
 							className="hidden sm:inline-flex h-10"
 						>

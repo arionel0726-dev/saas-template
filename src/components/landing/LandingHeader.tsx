@@ -1,7 +1,8 @@
 import { LanguageSwitcher } from '@/components/buttons/language-switcher'
 import { ThemeToggle } from '@/components/buttons/theme-toggle'
+import { MobileMenu } from '@/components/modals/mobile-menu'
 import { Button } from '@/components/ui/button'
-import { LinkButton } from '@/components/ui/link-button' // или Button + render
+import { LinkButton } from '@/components/ui/link-button'
 import { getT } from '@/i18n/server'
 import Link from 'next/link'
 
@@ -13,10 +14,17 @@ export async function LandingHeader() {
 				<Link href="/" className="font-semibold text-lg">
 					{t('common.appName')}
 				</Link>
-				<nav className="ml-auto flex items-center gap-1">
+
+				{/* мобилка: только burger */}
+				<div className="ml-auto sm:hidden">
+					<MobileMenu />
+				</div>
+
+				{/* десктоп/планшет: всё как было */}
+				<nav className="ml-auto hidden sm:flex items-center gap-1">
 					<Button
 						variant="ghost"
-						className="hidden sm:inline-flex h-10"
+						className="h-10"
 						render={<Link href="/price" />}
 					>
 						{t('nav.pricing')}
@@ -26,7 +34,7 @@ export async function LandingHeader() {
 					<LinkButton
 						href="/login"
 						variant="ghost"
-						className="h-10 rounded-full	"
+						className="h-10 rounded-full"
 					>
 						{t('nav.signIn')}
 					</LinkButton>

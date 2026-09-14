@@ -1,3 +1,4 @@
+import { CtaSection } from '@/components/landing/cta-section'
 import { LandingFooter } from '@/components/landing/LandingFooter'
 import { LandingHeader } from '@/components/landing/LandingHeader'
 import { LinkButton } from '@/components/ui/link-button'
@@ -24,6 +25,7 @@ export default function Home() {
 					</LinkButton>
 				</div>
 			</section>
+			<CtaSection />
 			<LandingFooter />
 		</main>
 	)

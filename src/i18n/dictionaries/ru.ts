@@ -49,6 +49,12 @@ const ru = {
 	'theme.dark': 'Тёмная',
 	'landing.faq.title': 'Частые вопросы',
 
+	'common.retry': 'Попробовать снова',
+	'landing.testimonials.title': 'Отзывы',
+	'landing.cta.title': 'Начните прямо сейчас',
+	'landing.cta.subtitle':
+		'Бесплатный тариф без карты. Апгрейд за минуту, когда понадобится.',
+
 	// language
 	'lang.switch': 'Язык'
 } as const

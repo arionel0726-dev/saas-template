@@ -1,5 +1,14 @@
 'use client'
+import { Button } from '@/components/ui/button'
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle
+} from '@/components/ui/card'
 import { useI18n } from '@/i18n/context'
+import { TriangleAlert } from 'lucide-react'
 import { useEffect } from 'react'
 
 export default function Error({
@@ -10,6 +19,7 @@ export default function Error({
 	reset: () => void
 }) {
 	const { t } = useI18n()
+
 	useEffect(() => {
 		fetch('/api/errors', {
 			method: 'POST',
@@ -23,19 +33,23 @@ export default function Error({
 	}, [error])
 
 	return (
-		<div className="min-h-dvh grid place-items-center bg-base-200 p-4">
-			<div className="card bg-base-100 shadow-xl w-full max-w-sm">
-				<div className="card-body items-center text-center gap-4">
-					<h2 className="card-title">{t('auth.error.generic')}</h2>
-					<button
-						className="btn btn-primary btn-block min-h-12"
-						onClick={reset}
-					>
-						{t('common.save')}{' '}
-						{/* лучше добавить ключ 'common.retry': 'Попробовать снова' */}
-					</button>
-				</div>
-			</div>
+		<div className="min-h-dvh grid place-items-center bg-muted/40 p-4">
+			<Card className="w-full max-w-sm shadow-xl">
+				<CardHeader className="items-center text-center gap-2">
+					<TriangleAlert size={32} className="text-destructive" />
+					<CardTitle>{t('auth.error.generic')}</CardTitle>
+					{error.digest && (
+						<CardDescription className="font-mono text-xs">
+							digest: {error.digest}
+						</CardDescription>
+					)}
+				</CardHeader>
+				<CardContent>
+					<Button className="w-full h-11" onClick={reset}>
+						{t('common.retry')}
+					</Button>
+				</CardContent>
+			</Card>
 		</div>
 	)
 }

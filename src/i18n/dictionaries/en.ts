@@ -44,6 +44,12 @@ const en: Dictionary = {
 	'theme.dark': 'Dark',
 	'landing.faq.title': 'FAQ',
 
+	'common.retry': 'Try again',
+	'landing.testimonials.title': 'Testimonials',
+	'landing.cta.title': 'Start now',
+	'landing.cta.subtitle':
+		'Free plan, no card required. Upgrade in a minute when you need to.',
+
 	'lang.switch': 'Language'
 }
 
