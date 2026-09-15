@@ -1,12 +1,12 @@
 // better Auth or next Auth.js
+import * as authSchema from '@/db/auth-schema'
 import { subscriptions } from '@/db/schema'
+import { db } from '@/lib/db'
 import { enqueueEmail } from '@/lib/email'
 import { cancelLemonSqueezySubscription } from '@/lib/lemonsqueezy'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { eq } from 'drizzle-orm'
-import * as authSchema from '../db/auth-schema'
-import { db } from './db'
 
 export const auth = betterAuth({
 	appName: 'app-name',
@@ -38,6 +38,18 @@ export const auth = betterAuth({
 		google: {
 			clientId: process.env.GOOGLE_CLIENT_ID!,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+		}
+	},
+	databaseHooks: {
+		user: {
+			create: {
+				// welcome-письмо на любой способ регистрации (email+пароль или
+				// Google) — не завязано на verify, чтобы не терять Google-юзеров,
+				// у которых email уже подтверждён провайдером
+				after: async user => {
+					await enqueueEmail(user.email, 'welcome', { name: user.name })
+				}
+			}
 		}
 	},
 	user: {

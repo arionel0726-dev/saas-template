@@ -42,7 +42,7 @@ export default async function AppLayout({
 								variant="ghost"
 								size="sm"
 								render={<Link href="/dashboard/errors" />}
-								className="hidden sm:inline-flex h-10"
+								className="h-10"
 							>
 								{t('nav.errors')}
 							</Button>

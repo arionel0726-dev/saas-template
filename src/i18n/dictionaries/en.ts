@@ -59,8 +59,12 @@ const en: Dictionary = {
 	'billing.history.empty': 'No payments yet',
 	'billing.history.receipt': 'Receipt',
 	'account.delete': 'Delete account',
+	'account.deleteTitle': 'Delete account?',
 	'account.deleteConfirm':
 		'Permanently delete your account? This cannot be undone.',
+	'account.deletePassword': 'Password',
+	'account.deletePasswordHint':
+		"Needed if you signed in more than a day ago — you can leave it blank right after signing in",
 	'common.copy': 'Copy',
 	'common.copied': 'Copied',
 	'theme.toggle': 'Theme',

@@ -64,8 +64,12 @@ const ru = {
 	'billing.history.empty': 'Платежей пока нет',
 	'billing.history.receipt': 'Чек',
 	'account.delete': 'Удалить аккаунт',
+	'account.deleteTitle': 'Удалить аккаунт?',
 	'account.deleteConfirm':
 		'Удалить аккаунт безвозвратно? Это действие нельзя отменить.',
+	'account.deletePassword': 'Пароль',
+	'account.deletePasswordHint':
+		'Нужен, если вы вошли больше суток назад — сразу после входа можно оставить пустым',
 	'common.copy': 'Копировать',
 	'common.copied': 'Скопировано',
 	'theme.toggle': 'Тема',
