@@ -29,9 +29,18 @@ export default function RegisterPage() {
 		e.preventDefault()
 		setError(null)
 		setLoading(true)
-		const { error } = await authClient.signUp.email({ name, email, password })
+		const { data, error } = await authClient.signUp.email({
+			name,
+			email,
+			password,
+			callbackURL: ROUTES.verifyEmail
+		})
 		setLoading(false)
 		if (error) setError(error.message ?? t('auth.error.generic'))
+		// requireEmailVerification (src/lib/auth.ts) — сессия не создаётся до
+		// подтверждения email, дальше некуда пускать, кроме страницы верификации
+		else if (!data?.token)
+			router.push(`${ROUTES.verifyEmail}?email=${encodeURIComponent(email)}`)
 		else router.push(ROUTES.afterLogin)
 	}
 

@@ -19,6 +19,18 @@ export async function LandingFooter() {
 					>
 						{t('nav.signIn')}
 					</Link>
+					<Link
+						href="/privacy"
+						className="hover:text-foreground transition-colors"
+					>
+						{t('nav.privacy')}
+					</Link>
+					<Link
+						href="/terms"
+						className="hover:text-foreground transition-colors"
+					>
+						{t('nav.terms')}
+					</Link>
 				</nav>
 				<p>
 					© {new Date().getFullYear()} {t('common.appName')}

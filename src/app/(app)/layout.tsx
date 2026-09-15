@@ -3,6 +3,7 @@ import { SignOutButton } from '@/components/buttons/sign-out-button'
 import { ThemeToggle } from '@/components/buttons/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { getT } from '@/i18n/server'
+import { isAdminEmail } from '@/lib/admin'
 import { auth } from '@/lib/auth'
 import { ROUTES } from '@/lib/routes'
 import { headers } from 'next/headers'
@@ -36,6 +37,16 @@ export default async function AppLayout({
 						>
 							{t('nav.pricing')}
 						</Button>
+						{isAdminEmail(session.user.email) && (
+							<Button
+								variant="ghost"
+								size="sm"
+								render={<Link href="/dashboard/errors" />}
+								className="hidden sm:inline-flex h-10"
+							>
+								{t('nav.errors')}
+							</Button>
+						)}
 						<LanguageSwitcher />
 						<ThemeToggle />
 						{/* на мобиле email скрыт, как раньше */}

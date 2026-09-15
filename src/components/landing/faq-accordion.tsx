@@ -14,7 +14,7 @@ export function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 			<h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-center mb-6">
 				{t('landing.faq.title')}
 			</h2>
-			<Accordion collapsible className="w-full">
+			<Accordion className="w-full">
 				{items.map((item, i) => (
 					<AccordionItem key={i} value={`item-${i}`}>
 						<AccordionTrigger className="min-h-12 text-left">

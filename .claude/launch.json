@@ -1,0 +1,11 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "saas-dev",
+			"runtimeExecutable": "bun",
+			"runtimeArgs": ["run", "dev", "--", "-p", "3101"],
+			"port": 3101
+		}
+	]
+}

@@ -1,7 +1,7 @@
 import { subscriptions } from '@/db/schema'
 import { captureError } from '@/lib/capture-error'
 import { db } from '@/lib/db'
-import { createHmac, timingSafeEqual } from 'crypto'
+import { verifyLemonSqueezySignature } from '@/lib/lemonsqueezy'
 import { eq } from 'drizzle-orm'
 import { NextResponse } from 'next/server'
 
@@ -9,13 +9,13 @@ export async function POST(req: Request) {
 	const rawBody = await req.text()
 	const signature = req.headers.get('x-signature') ?? ''
 
-	const digest = createHmac('sha256', process.env.LEMONSQUEEZY_WEBHOOK_SECRET!)
-		.update(rawBody)
-		.digest('hex')
-
-	const a = Buffer.from(signature)
-	const b = Buffer.from(digest)
-	if (a.length !== b.length || !timingSafeEqual(a, b)) {
+	if (
+		!verifyLemonSqueezySignature(
+			rawBody,
+			signature,
+			process.env.LEMONSQUEEZY_WEBHOOK_SECRET!
+		)
+	) {
 		return NextResponse.json({ error: 'invalid signature' }, { status: 401 })
 	}
 

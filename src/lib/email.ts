@@ -1,9 +1,11 @@
 import { emailOutbox } from '@/db/schema'
+import { ResetPasswordEmail } from '@/emails/reset-password'
+import { VerifyEmailEmail } from '@/emails/verify-email'
 import { WelcomeEmail } from '@/emails/welcome'
 import { captureError } from '@/lib/capture-error'
 import { db } from '@/lib/db'
 import { render } from '@react-email/render'
-import { eq } from 'drizzle-orm'
+import { and, eq, lt } from 'drizzle-orm'
 import { Resend } from 'resend'
 
 // Ленивая инициализация: не падаем при импорте модуля, если ключ не задан
@@ -16,6 +18,14 @@ const TEMPLATES = {
 	welcome: {
 		subject: 'Добро пожаловать',
 		render: (p: { name: string }) => render(WelcomeEmail(p))
+	},
+	reset: {
+		subject: 'Сброс пароля',
+		render: (p: { url: string }) => render(ResetPasswordEmail(p))
+	},
+	verify: {
+		subject: 'Подтвердите email',
+		render: (p: { url: string }) => render(VerifyEmailEmail(p))
 	}
 } as const
 
@@ -61,4 +71,14 @@ export async function processOutbox(limit = 10) {
 				.where(eq(emailOutbox.id, job.id))
 		}
 	}
+}
+
+// Чистка email_outbox: отправленные письма старше 30 дней больше не нужны
+export async function purgeOutbox(olderThanDays = 30) {
+	const cutoff = new Date(Date.now() - olderThanDays * 24 * 60 * 60 * 1000)
+	const deleted = await db
+		.delete(emailOutbox)
+		.where(and(eq(emailOutbox.status, 'sent'), lt(emailOutbox.sentAt, cutoff)))
+		.returning({ id: emailOutbox.id })
+	return deleted.length
 }

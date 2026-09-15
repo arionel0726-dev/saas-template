@@ -1,10 +1,17 @@
 import { auth } from '@/lib/auth'
+import { clientKey, rateLimit, tooManyRequestsResponse } from '@/lib/rate-limit'
 import { ROUTES } from '@/lib/routes'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 export async function GET(req: Request) {
 	const session = await auth.api.getSession({ headers: await headers() })
 	if (!session) return NextResponse.redirect(new URL(ROUTES.login, req.url))
+
+	const limit = rateLimit(clientKey(req, `checkout:${session.user.id}`), {
+		windowMs: 60_000,
+		max: 10
+	})
+	if (!limit.allowed) return tooManyRequestsResponse(limit.retryAfterMs)
 
 	const { searchParams } = new URL(req.url)
 	const plan = searchParams.get('plan')
